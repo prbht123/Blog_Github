@@ -2,9 +2,13 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
-
+from django.urls import reverse
 
 # Create your models here.
+
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset()
 
 class Post(models.Model):
     STATUS_CHOICES = (
@@ -20,7 +24,8 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10,choices=STATUS_CHOICES,default='draft')
 
-
+    objects = models.Manager() # The default manager.
+    published = PublishedManager() # Our custom manager.
 
     class Meta:
         ordering = ('-publish',)
