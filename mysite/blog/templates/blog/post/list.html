@@ -2,6 +2,9 @@
 {% block title %}My Blog{% endblock %}
 {% block content %}
 <h1>My Blog</h1>
+<h3>rebase</h3>
+<h3>rebase1</h3>
+<h3>rebase2</h3>
 {% for post in posts %}
 <h2>
 <a href="{{ post.get_absolute_url }}">
@@ -13,4 +16,5 @@ Published {{ post.publish }} by {{ post.author }}
 </p>
 {{ post.body|truncatewords:30|linebreaks }}
 {% endfor %}
+{% include "pagination.html" with page=posts %}
 {% endblock %}
